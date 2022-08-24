@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanyuan.springboot.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.lanyuan.springboot.pojo.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="reloname" jdbcType="VARCHAR" property="reloname" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, reloname, status, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByUid" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from user_role us,role r where r.id=us.role and us.userid = #{uid}
+    </select>
+  <select id="show" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from role
+    <trim prefix="where" prefixOverrides="or">
+      <if test="reloname!=null">
+        <bind name="newname" value="'%'+reloname+'%'"/>
+        or reloname like #{newname}
+      </if>
+    </trim>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanyuan.springboot.pojo.Role">
+    insert into role (id, reloname, status, 
+      createtime)
+    values (#{id,jdbcType=INTEGER}, #{reloname,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lanyuan.springboot.pojo.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="reloname != null">
+        reloname,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="reloname != null">
+        #{reloname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanyuan.springboot.pojo.Role">
+    update role
+    <set>
+      <if test="reloname != null">
+        reloname = #{reloname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lanyuan.springboot.pojo.Role">
+    update role
+    set reloname = #{reloname,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "role",
+      "type": "com.lanyuan.springboot.pojo.Role",
+      "sourceType": "com.lanyuan.springboot.pojo.Role"
+    }
+  ],
+  "properties": [
+    {
+      "name": "role.createtime",
+      "type": "java.util.Date",
+      "sourceType": "com.lanyuan.springboot.pojo.Role"
+    },
+    {
+      "name": "role.id",
+      "type": "java.lang.Integer",
+      "sourceType": "com.lanyuan.springboot.pojo.Role"
+    },
+    {
+      "name": "role.reloname",
+      "type": "java.lang.String",
+      "sourceType": "com.lanyuan.springboot.pojo.Role"
+    },
+    {
+      "name": "role.status",
+      "type": "java.lang.String",
+      "sourceType": "com.lanyuan.springboot.pojo.Role"
+    }
+  ],
+  "hints": []
+}
