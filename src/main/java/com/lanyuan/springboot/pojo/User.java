@@ -1,17 +1,21 @@
 package com.lanyuan.springboot.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+//@ApiModel和 @ApiModelProperty 这两个注解只是为实体类添加注解
+@ApiModel("用户实体类")  //为类添加注解
 public class User implements Serializable {
-
+    @ApiModelProperty("编号") //为类属性添加注解
     private Integer id;
-
+    @ApiModelProperty("用户名")
     private String account;
-
+    @ApiModelProperty("姓名")
     private String name;
-
+    @ApiModelProperty("密码")
     private String password;
 
     private String phone;

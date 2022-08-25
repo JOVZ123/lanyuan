@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<body>
+    <div th:text="'你好 '+${sss}+'!'"></div>
+    <p th:utext="${sss}">hello</p>
+    <p th:text="${sss}">hello</p>
+    <!--双竖杠里面只能写${} 表达式 其他都无效-->
+<!--    <span th:text="|你好 ${sss}|!"></span>-->
+    <table cellpadding="10" cellspacing="0" border="1">
+        <tr>
+            <th>下标</th>
+            <th>编号</th>
+            <th>账号</th>
+            <th>姓名</th>
+            <th>角色</th>
+            <th>性别</th>
+        </tr>
+<!--        <tr th:each="user:${p1.list}">-->
+<!--            <td th:text="${user.id}"></td>-->
+<!--            <td th:text="${user.account}"></td>-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <td>-->
+<!--                <table cellpadding="10" cellspacing="0" border="1">-->
+<!--                    <tr>-->
+<!--                        <th>角色编号</th>-->
+<!--                        <th>角色名称</th>-->
+<!--                        <th>角色状态</th>-->
+<!--                    </tr>-->
+<!--                    <tr th:each="role:${user.roles}">-->
+<!--                        <td th:text="${role.id}"></td>-->
+<!--                        <td th:text="${role.reloname}"></td>-->
+<!--                        <td th:text="${role.status}"></td>-->
+<!--                    </tr>-->
+
+<!--                </table>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <span th:if="${user.sex eq '1'}">男</span>-->
+<!--                <span th:if="${user.sex eq '0'}">女</span>-->
+<!--            </td>-->
+<!--        </tr>-->
+        <tr th:object="${user}" th:each="user:${p1.list}">
+            <td th:text="${userStat.index}"></td>
+            <td th:text="*{id}"></td>
+            <td th:text="*{account}"></td>
+            <td th:text="*{name}"></td>
+            <td>
+                <table cellpadding="10" cellspacing="0" border="0">
+                    <tr th:if="*{!#lists.isEmpty(roles)}">
+                        <th>角色编号</th>
+                        <th>角色名称</th>
+                        <th>角色状态</th>
+                    </tr>
+                    <tr th:object="${role}" th:each="role:${user.roles}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{reloname}"></td>
+                        <td th:text="*{status}"></td>
+                    </tr>
+
+                </table>
+            </td>
+            <td>
+                <span th:if="*{sex eq '1'}">男</span>
+                <span th:if="*{sex eq '0'}">女</span>
+            </td>
+        </tr>
+
+    </table>
+
+    <div th:switch="${p1.list}">
+        <p th:case="'admin'">当前账号是admin</p>
+        <p th:case="#{role.reloname}">当前账号是chaoji</p>
+        <p th:case="*">当前账号是未知</p>
+    </div>
+<!--user 类似var  userStat 是状态-->
+    <span th:each="user,userStat:${p1.list}">
+        下标：<span th:text="${userStat.index}"></span>
+        <span th:text="${user.id}"></span>
+        <span th:text="${user.name}"></span>
+        <br>
+    </span>
+    <a th:href="@{/one}">跳转</a>
+    <a th:href="@{/user/getId(id=1)}">查询</a>
+    <br>
+    <select>
+        <option th:text="请选择"></option>
+        <option th:object="${role}" th:each="role:${prr.list}" th:text="*{reloname}"></option>
+    </select>
+
+    <span th:text="${#dates.format('2019/12/12','yyyy/MM/dd')}"></span>
+    <span th:text="${#dates.createNow()}"></span>
+    <span th:text="${#dates.createToday()}"></span>
+    <!--四舍五入格式化-->
+    <span th:text="${#numbers.formatDecimal(1343141.223,2,1)}"></span>
+</body>
+</html>

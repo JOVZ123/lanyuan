@@ -17,7 +17,6 @@ public class RoleController {
     @Autowired
     RoleService rs;
     @PostMapping("/show")
-    @ResponseBody
     public Map<String ,Object> show(HttpSession session, @RequestParam(defaultValue = "1")Integer pageNum, @RequestParam(defaultValue = "4") Integer pageSize, String search){
         Map<String,Object> map = new HashMap<>();
         if (search==null){

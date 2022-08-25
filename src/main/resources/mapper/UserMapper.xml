@@ -117,6 +117,9 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertRelation">
+    insert into user_role values(#{uid},#{rid})
+  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lanyuan.springboot.pojo.User">
     update user
     <set>

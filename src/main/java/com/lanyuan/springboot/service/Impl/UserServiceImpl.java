@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserService {
     public int update(User user) {
         return mapper.updateByPrimaryKeySelective(user);
     }
+
+    @Override
+    public int relation(Integer uid, Integer rid) {
+        return mapper.insertRelation(uid,rid);
+    }
 }

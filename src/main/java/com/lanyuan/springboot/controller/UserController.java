@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.lanyuan.springboot.pojo.User;
 import com.lanyuan.springboot.service.UserService;
 import com.lanyuan.springboot.util.CodeUtil;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,6 +78,12 @@ public class UserController {
         }
         return map;
     }
+    @RequestMapping("/getId")
+    @ResponseBody
+    public User getId(Integer id){
+        User user = us.selectId(id);
+        return user;
+    }
     @PostMapping("/update")
     public Map<String,Object> update(User user){
         Map<String ,Object> map = new HashMap<>();
@@ -90,9 +97,10 @@ public class UserController {
         return map;
     }
     @PostMapping("/insert")
-    public Map<String,Object> insert(User user){
+    public Map<String,Object> insert(User user,Integer rid){
         Map<String ,Object> map = new HashMap<>();
         int i = us.add(user);
+        int relation = us.relation(user.getId(), rid);
         if (i>0){
             map.put("新增成功","success");
         }else {

@@ -2,6 +2,7 @@ package com.lanyuan.springboot.service;
 
 import com.github.pagehelper.PageInfo;
 import com.lanyuan.springboot.pojo.User;
+import io.swagger.models.auth.In;
 
 import java.util.Set;
 
@@ -13,4 +14,5 @@ public interface UserService {
     Set<User> selectById(Integer[] id);
     User selectId(Integer id);
     int update(User user);
+    int relation(Integer uid, Integer rid);
  }

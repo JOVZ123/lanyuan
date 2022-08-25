@@ -1,6 +1,8 @@
 package com.lanyuan.springboot.mapper;
 
 import com.lanyuan.springboot.pojo.User;
+import io.swagger.models.auth.In;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +22,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     User login(User user);
     List<User> show(User user);
+
+    int insertRelation(@Param("uid") Integer uid, @Param("rid") Integer rid);
 }
